@@ -5,7 +5,7 @@ AWS_IOT hornbill;
 
 char WIFI_SSID[]="Vayu_Sanchar_Mob";
 char WIFI_PASSWORD[]="alpha123";
-char HOST_ADDRESS[]="a1md5u8zsh7qph.iot.us-west-2.amazonaws.com";
+char HOST_ADDRESS[]="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx";
 char CLIENT_ID[]= "EspLora3";
 char TOPIC_NAME[]= "NJTS/IDB";
 
