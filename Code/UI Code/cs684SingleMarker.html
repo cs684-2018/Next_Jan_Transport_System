@@ -1,0 +1,215 @@
+<!--
+Team Id: Next Jan Transport System 
+Author List: Abhijit Divekar, AjayKumar Maurya, Punit Jain.
+Filename: cs684SingleMarker.html
+Theme: CS 684 Project 
+JavaScript Functions: initMap(), readItem(), formatLatLng(), ObtainAddress(), ETAandDisplay().
+This File Accesses Data from DynamoDB of a single Bus. It then Queries Google Maps API for Estimated Time Arrival. 
+It also displays the current Location and ETA in a tabular form indexed by BusIDS. Further it highlights the route that bus  will take.
+-->
+
+<html>
+<head>
+<style>
+      #map {
+        height: 100%;
+      }
+#floating-panel {
+        position: absolute;
+        top: 50px;
+        left: 15%;
+        z-index: 5;
+        background-color: #fff;
+        padding: 5px;
+        border: 1px solid #999;
+        text-align: center;
+        font-family: 'Roboto','sans-serif';
+        line-height: 30px;
+        padding-left: 10px;
+      }
+#floating-panel {
+        position: absolute;
+        top: 50px;
+        left: 15%;
+        margin-left: -180px;
+        width: 350px;
+        z-index: 5;
+        background-color: #fff;
+        padding: 5px;
+        border: 1px solid #999;
+      }
+table, th, td {
+    border: 1px solid black;
+}
+</style>
+<script src="https://sdk.amazonaws.com/js/aws-sdk-2.7.16.min.js"></script>
+
+<script>
+AWS.config.update({
+  region: "us-west-2",
+//access key id and secretAccessKey can be obtained from settings in DynamoDB portal. 
+  accessKeyId: 'xxxxxxxxxxxxxxxx',
+  secretAccessKey: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'
+});
+
+var docClient = new AWS.DynamoDB.DocumentClient();
+function initMap() {
+	var directionsService = new google.maps.DirectionsService;
+	var directionsDisplay = new google.maps.DirectionsRenderer;
+	var geocoder = new google.maps.Geocoder;
+    var infowindow = new google.maps.InfoWindow;
+	//var latlng = new google.maps.LatLng(41.85, -87.65);
+	var map = new google.maps.Map(document.getElementById('map'), {
+	  zoom: 14,
+	  center: {lat: 19.1334, lng: 72.9133}
+	});
+	directionsDisplay.setMap(map);
+	console.log("Google Maps loaded");
+	setInterval( function() { readItem(directionsService, directionsDisplay,geocoder,map,infowindow); }, 5000 );
+//	readItem(directionsService, directionsDisplay,geocoder,map);
+
+
+
+//	var onChangeHandler = function() {
+//	  calculateAndDisplayRoute(directionsService, directionsDisplay);
+//	};
+//	document.getElementById('start').addEventListener('change', onChangeHandler);
+//	document.getElementById('end').addEventListener('change', onChangeHandler);
+}
+
+function readItem(directionsService, directionsDisplay,geocoder,map,infowindow) {
+//var geocoder = geocoder;
+var BusData = new Object()
+ 		var params = {
+			TableName : "BusData3",
+			KeyConditionExpression: "#id = :ddd",
+			ExpressionAttributeNames:{
+				"#id": "BusID"
+			},
+			ExpressionAttributeValues: {
+				":ddd":"602"
+			}
+		};
+    docClient.query(params, function(err, data) {
+        if (err) {
+         //   document.getElementById('textarea').innerHTML = "Unable to read item: " + "\n" + JSON.stringify(err, undefined, 2);
+			console.log("Unable to read item: " + "\n" + JSON.stringify(err, undefined, 2));
+        } else {
+            //document.getElementById('textarea').innerHTML = "GetItem succeeded: " + "\n" + JSON.stringify(data, undefined, 2);
+			JSON.stringify(data, undefined, 2);
+			console.log("Query Fetched");
+			BusData["BusID"] = data.Items[0].payload.BusID;
+			BusData["LatLng"] = {"lat": data.Items[0].payload.Latitude, "lng": data.Items[0].payload.Longitude}
+			document.getElementById("BusID").innerHTML = data.Items[0].payload.BusID; 
+			console.log("BusData stored in object");
+			if (Object.keys(BusData).length === 0 && BusData.constructor === Object)
+			{console.log("Do nothing");
+			}
+			else{
+			console.log("sending BusData for formatting");
+			formatLatLng(BusData,directionsService, directionsDisplay,geocoder,map,infowindow);	
+			}
+
+
+		}
+    });
+}
+
+function formatLatLng(BusData,directionsService, directionsDisplay,geocoder,map,infowindow){
+//alert(BusData.BusID);
+//alert(BusData.LatLng.lat);
+//alert(BusData.LatLng.lng);
+var temp1 = BusData.LatLng.lat.slice(0,2);
+temp1 = parseFloat(temp1);
+var temp2 = BusData.LatLng.lat.slice(2,10);
+temp2 = parseFloat(temp2);	
+temp2 =  (temp2/60.0);
+var temp5 = temp1+ temp2;
+temp5 = temp5.toFixed(5);
+//alert(temp5);
+
+var temp3 = BusData.LatLng.lng.slice(0,3);	
+temp3 = parseFloat(temp3);	
+var temp4 = BusData.LatLng.lng.slice(3,11);
+temp4 = parseFloat(temp4);
+temp4 =  (temp4/60.0);
+var temp6 = temp3+ temp4;
+temp6 = temp6.toFixed(5);
+//alert(temp6);
+console.log("Formatting Done and sending data to geocoder and renderer");
+var input = temp5.toString()+","+temp6.toString() ; 
+ObtainAddress(input,directionsService, directionsDisplay,geocoder,map,infowindow);
+}
+
+function ObtainAddress(input,directionsService, directionsDisplay,geocoder,map,infowindow){
+        var latlngStr = input.split(',', 2);
+        var latlng = {lat: parseFloat(latlngStr[0]), lng: parseFloat(latlngStr[1])};
+        geocoder.geocode({'location': latlng}, function(results, status) {
+          if (status === 'OK') {
+            if (results[0]) {
+				var Address = results[0].formatted_address;
+				document.getElementById("Location").innerHTML = Address;
+	//			alert(Address);
+				console.log("Address Obtained, Calling ETA Calculator and DirectionsRenderer")
+				ETAandDisplay(latlng,directionsService, directionsDisplay,map,infowindow);
+            } else {
+              window.alert('No results found');
+            }
+          } else {
+            window.alert('Geocoder failed due to: ' + status);
+          }
+        });}
+
+function ETAandDisplay(latlng,directionsService, directionsDisplay,map,infowindow){
+var Dest ={lat:19.105206, lng:72.885717};
+	var request = {
+		origin: latlng,
+		destination: Dest,
+		travelMode: 'DRIVING',
+		provideRouteAlternatives: false,
+		};
+	directionsService.route(request, function(result, status) {
+	if (status == 'OK') {
+		var ETA =JSON.stringify(result.routes[0].legs[0].duration.text);
+		document.getElementById("ETA").innerHTML = ETA;
+		directionsDisplay.setOptions({
+		preserveViewport:true,
+	});
+//	directionsDisplay.setMap(map);
+	directionsDisplay.setDirections(result);
+	  
+	//  var step=1;
+     // infowindow.setContent(result.routes[0].legs[0].distance.text + "<br>" + ETA + " ");
+      //infowindow.setPosition(result.routes[0].legs[0].steps[step].end_location);
+	  //infowindow.open(map);
+	}		
+	else{
+	window.alert('Direction Service failed due to: ' + status);
+	}
+});
+}
+</script>
+
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAQYQgMV5T_0ky48LhJuYkMeJflOSr1qGk&callback=initMap">
+    </script>
+</head>
+
+<body>
+<div id="floating-panel">
+<table style="width:100%">
+  <tr>
+    <th>Bus ID</th>
+    <th>Locations</th> 
+    <th>Estimated Time of Arrival</th>
+  </tr>
+  <tr>
+    <th id="BusID"></th>
+    <th id="Location"></th> 
+    <th id="ETA"></th>
+  </tr>
+</table>
+</div>
+<div id="map"></div>
+</body>
+</html>

@@ -1,0 +1,66 @@
+<html>
+<h1>2018 - CS684  Group X : Project Next Jan Transport System (NJTS)</h1>
+
+<h2>Group Info:</h2>
+
+<ul>
+<li><strong>Abhijit Divekar (163079036)</strong> </li>
+<li><strong>AjayKumar Maurya (16307R009)</strong></li>
+<li><strong>Punit Jain (17307R016)</strong></li>
+</ul>
+
+<h2>Extension Of</h2>
+
+<p>No, this project is not an extension of any previous project.  </p>
+
+<h1>Project Description</h1>
+
+<p>In a Metropolitan city like Mumbai, majority of population depends on public transport i.e. Local Trains and Buses. 
+Out of the two, buses are the one that reaches each and every corner of the city. 
+But, buses are very unpredictable and in case if there is any delay/cancellation, people are not informed, 
+which leads to formation of large queues at the Bus stop and people are then forced to take other expensive means of transport. 
+<strong>Next Jan Transport System (NJTS)</strong> uses <strong>GPS</strong> and <strong>EspLoRa32 network</strong> to locate the exact position of buses and Google API's to calculate the <strong>Estimated Time of Arrival(ETA)</strong>.
+The Information regarding location of buses with their respective <strong>Bus IDs</strong> and <strong>timestamp</strong> is stored at <strong>AWS-DynamoDB Database</strong>.
+This data from DynamoDB can be accessed by the webpage in which location of bus-stops(currently hard-coded) can be used to calculate ETA using Google Maps API. 
+This implementation will help the public to efficiently manage their time and money, and also it will improve the standards of the service providers which would increase their number of users.</p>
+
+<h2>Technologies Used</h2>
+
+<ul>
+<li>Embedded C </li>
+<li>Esp32 (Wifi+LoRa -433 MHz)</li>
+<li>NEO-6M GPS Module</li>
+<li>AWS-IOT</li>
+<li>JavaScript</li>
+<li>HTML    </li>
+</ul>
+
+<h1>Installation Instructions</h1>
+
+<ul>
+<li><a href="https://youtu.be/M7_jYx-QBrk">Software Installation Video</a></li>
+</ul>
+
+<h2>Software Links</h2>
+
+<ul>
+<li><a href="https://www.arduino.cc/en/Guide/Windows">Arduino</a></li>
+<li><a href="https://github.com/Heltec-Aaron-Lee/WiFi_Kit_series">ESP32 Libraries</a></li>
+<li><a href="https://github.com/ExploreEmbedded/Hornbill-Examples/tree/master/arduino-esp32/AWS_IOT">Additional Esp32 Libraries for AWS support</a></li>
+</ul>
+
+<p>A Chrome/Firefox browser is required to run .html files of project. No Additional Software is Required for that.</p>
+
+<h1>Demonstration Video</h1>
+
+<p>Add the youtube link of the screencast of your project demo.</p>
+
+<h1>References</h1>
+
+<ul>
+<li><a href="https://www.exploreembedded.com/wiki/Secure_IOT_with_AWS_and_Hornbill_ESP32">Registering Thing with AWS-IOT and MQTT pub-sub</a></li>
+<li><a href="https://docs.aws.amazon.com/iot/latest/developerguide/iot-gs.html">AWS-IOT Tutorials</a></li>
+<li><a href="https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/GettingStarted.html">AWS-DynamoDB Tutorials</a></li>
+<li><a href="https://developers.google.com/maps/">Google Maps API</a></li>
+</ul>
+</html>
