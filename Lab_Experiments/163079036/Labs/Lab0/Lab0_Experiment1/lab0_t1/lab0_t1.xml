@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cdtprojectproperties>
+<section name="org.eclipse.cdt.internal.ui.wizards.settingswizards.IncludePaths">
+<language name="C Source File">
+<includepath>/home/punitjain8695/WS_TI/lab0_t1</includepath>
+<includepath>/opt/ti/TivaWare_C_Series-2.1.2.111</includepath>
+<includepath>/opt/ti/ccsv7/tools/compiler/ti-cgt-arm_16.9.6.LTS/include</includepath>
+
+</language>
+<language name="C++ Source File">
+<includepath>/home/punitjain8695/WS_TI/lab0_t1</includepath>
+<includepath>/opt/ti/TivaWare_C_Series-2.1.2.111</includepath>
+<includepath>/opt/ti/ccsv7/tools/compiler/ti-cgt-arm_16.9.6.LTS/include</includepath>
+
+</language>
+<language name="Assembly Source File">
+<includepath>/home/punitjain8695/WS_TI/lab0_t1</includepath>
+<includepath>/opt/ti/TivaWare_C_Series-2.1.2.111</includepath>
+<includepath>/opt/ti/ccsv7/tools/compiler/ti-cgt-arm_16.9.6.LTS/include</includepath>
+
+</language>
+<language name="Assembly Source File">
+<includepath>/home/punitjain8695/WS_TI/lab0_t1</includepath>
+<includepath>/opt/ti/TivaWare_C_Series-2.1.2.111</includepath>
+<includepath>/opt/ti/ccsv7/tools/compiler/ti-cgt-arm_16.9.6.LTS/include</includepath>
+
+</language>
+<language name="Linker Command File">
+
+</language>
+<language name="Linker Command File">
+
+</language>
+<language name="Linker Command File">
+
+</language>
+</section>
+<section name="org.eclipse.cdt.internal.ui.wizards.settingswizards.Macros">
+<language name="C Source File">
+<macro>
+<name>ccs</name><value>"ccs"</value>
+</macro>
+<macro>
+<name>PART_TM4C123GH6PM</name><value/>
+</macro>
+
+</language>
+<language name="C++ Source File">
+<macro>
+<name>ccs</name><value>"ccs"</value>
+</macro>
+<macro>
+<name>PART_TM4C123GH6PM</name><value/>
+</macro>
+
+</language>
+<language name="Assembly Source File">
+<macro>
+<name>ccs</name><value>"ccs"</value>
+</macro>
+<macro>
+<name>PART_TM4C123GH6PM</name><value/>
+</macro>
+
+</language>
+<language name="Assembly Source File">
+<macro>
+<name>ccs</name><value>"ccs"</value>
+</macro>
+<macro>
+<name>PART_TM4C123GH6PM</name><value/>
+</macro>
+
+</language>
+<language name="Linker Command File">
+
+</language>
+<language name="Linker Command File">
+
+</language>
+<language name="Linker Command File">
+
+</language>
+</section>
+</cdtprojectproperties>

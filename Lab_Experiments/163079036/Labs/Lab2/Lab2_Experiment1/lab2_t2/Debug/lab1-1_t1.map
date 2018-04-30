@@ -1,0 +1,256 @@
+******************************************************************************
+                  TI ARM Linker Unix v16.9.6                   
+******************************************************************************
+>> Linked Tue Jan 16 19:45:47 2018
+
+OUTPUT FILE NAME:   <lab1-1_t1.out>
+ENTRY POINT SYMBOL: "_c_int00"  address: 000006c1
+
+
+MEMORY CONFIGURATION
+
+         name            origin    length      used     unused   attr    fill
+----------------------  --------  ---------  --------  --------  ----  --------
+  FLASH                 00000000   00040000  000008be  0003f742  R  X
+  SRAM                  20000000   00008000  00000218  00007de8  RW X
+
+
+SEGMENT ALLOCATION MAP
+
+run origin  load origin   length   init length attrs members
+----------  ----------- ---------- ----------- ----- -------
+00000000    00000000    000008c4   000008c4    r-x
+  00000000    00000000    0000026c   0000026c    r-- .intvecs
+  0000026c    0000026c    0000062e   0000062e    r-x .text
+  000008a0    000008a0    00000024   00000024    r-- .cinit
+20000000    20000000    00000218   00000000    rw-
+  20000000    20000000    00000200   00000000    rw- .stack
+  20000200    20000200    00000018   00000000    rw- .data
+
+
+SECTION ALLOCATION MAP
+
+ output                                  attributes/
+section   page    origin      length       input sections
+--------  ----  ----------  ----------   ----------------
+.intvecs   0    00000000    0000026c     
+                  00000000    0000026c     tm4c123gh6pm_startup_ccs.obj (.intvecs)
+
+.text      0    0000026c    0000062e     
+                  0000026c    00000132     driverlib.lib : gpio.obj (.text:GPIOPadConfigSet)
+                  0000039e    00000002     rtsv7M4_T_le_v4SPD16_eabi.lib : mpu_init.obj (.text)
+                  000003a0    000000f4     driverlib.lib : sysctl.obj (.text:SysCtlClockSet)
+                  00000494    000000b8     lab-1-1.obj (.text)
+                  0000054c    0000009c     rtsv7M4_T_le_v4SPD16_eabi.lib : memcpy_t2.obj (.text)
+                  000005e8    00000070                                   : autoinit.obj (.text)
+                  00000658    00000068                                   : copy_decompress_lzss.obj (.text:decompress:lzss)
+                  000006c0    00000054                                   : boot.obj (.text)
+                  00000714    00000054                                   : exit.obj (.text)
+                  00000768    0000004c                                   : cpy_tbl.obj (.text)
+                  000007b4    00000034     driverlib.lib : sysctl.obj (.text:SysCtlPeripheralEnable)
+                  000007e8    0000002a                   : gpio.obj (.text:GPIODirModeSet)
+                  00000812    00000018                   : gpio.obj (.text:GPIOPinTypeGPIOOutput)
+                  0000082a    00000002     rtsv7M4_T_le_v4SPD16_eabi.lib : startup.obj (.text)
+                  0000082c    00000018                                   : args_main.obj (.text)
+                  00000844    00000014                                   : _lock.obj (.text)
+                  00000858    00000012     driverlib.lib : gpio.obj (.text:GPIOPinTypeGPIOInput)
+                  0000086a    0000000e     rtsv7M4_T_le_v4SPD16_eabi.lib : copy_decompress_none.obj (.text:decompress:none)
+                  00000878    0000000c     tm4c123gh6pm_startup_ccs.obj (.text)
+                  00000884    00000006     driverlib.lib : gpio.obj (.text:GPIOPinRead)
+                  0000088a    00000006                   : gpio.obj (.text:GPIOPinWrite)
+                  00000890    00000006                   : sysctl.obj (.text:SysCtlDelay)
+                  00000896    00000004     rtsv7M4_T_le_v4SPD16_eabi.lib : pre_init.obj (.text)
+
+.cinit     0    000008a0    00000024     
+                  000008a0    00000011     (.cinit..data.load) [load image, compression = lzss]
+                  000008b1    00000003     --HOLE-- [fill = 0]
+                  000008b4    00000008     (__TI_handler_table)
+                  000008bc    00000008     (__TI_cinit_table)
+
+.init_array 
+*          0    00000000    00000000     UNINITIALIZED
+
+.data      0    20000200    00000018     UNINITIALIZED
+                  20000200    0000000c     rtsv7M4_T_le_v4SPD16_eabi.lib : exit.obj (.data:$O1$$)
+                  2000020c    00000008                                   : _lock.obj (.data:$O1$$)
+                  20000214    00000004                                   : stkdepth_vars.obj (.data)
+
+.stack     0    20000000    00000200     UNINITIALIZED
+                  20000000    00000200     --HOLE--
+
+MODULE SUMMARY
+
+       Module                         code   ro data   rw data
+       ------                         ----   -------   -------
+    ./
+       tm4c123gh6pm_startup_ccs.obj   12     620       0      
+       lab-1-1.obj                    184    0         0      
+    +--+------------------------------+------+---------+---------+
+       Total:                         196    620       0      
+                                                              
+    /opt/ti/TivaWare_C_Series-2.1.2.111/driverlib/ccs/Debug/driverlib.lib
+       gpio.obj                       402    0         0      
+       sysctl.obj                     302    0         0      
+    +--+------------------------------+------+---------+---------+
+       Total:                         704    0         0      
+                                                              
+    /opt/ti/ccsv7/tools/compiler/ti-cgt-arm_16.9.6.LTS/lib/rtsv7M4_T_le_v4SPD16_eabi.lib
+       memcpy_t2.obj                  156    0         0      
+       autoinit.obj                   112    0         0      
+       copy_decompress_lzss.obj       104    0         0      
+       exit.obj                       84     0         12     
+       boot.obj                       84     0         0      
+       cpy_tbl.obj                    76     0         0      
+       _lock.obj                      20     0         8      
+       args_main.obj                  24     0         0      
+       copy_decompress_none.obj       14     0         0      
+       pre_init.obj                   4      0         0      
+       stkdepth_vars.obj              0      0         4      
+       mpu_init.obj                   2      0         0      
+       startup.obj                    2      0         0      
+    +--+------------------------------+------+---------+---------+
+       Total:                         682    0         24     
+                                                              
+       Stack:                         0      0         512    
+       Linker Generated:              0      33        0      
+    +--+------------------------------+------+---------+---------+
+       Grand Total:                   1582   653       536    
+
+
+LINKER GENERATED COPY TABLES
+
+__TI_cinit_table @ 000008bc records: 1, size/record: 8, table size: 8
+	.data: load addr=000008a0, load size=00000011 bytes, run addr=20000200, run size=00000018 bytes, compression=lzss
+
+
+LINKER GENERATED HANDLER TABLE
+
+__TI_handler_table @ 000008b4 records: 2, size/record: 4, table size: 8
+	index: 0, handler: __TI_decompress_lzss
+	index: 1, handler: __TI_decompress_none
+
+
+GLOBAL SYMBOLS: SORTED ALPHABETICALLY BY Name 
+
+address   name                           
+-------   ----                           
+00000715  C$$EXIT                        
+000007e9  GPIODirModeSet                 
+0000026d  GPIOPadConfigSet               
+00000885  GPIOPinRead                    
+00000859  GPIOPinTypeGPIOInput           
+00000813  GPIOPinTypeGPIOOutput          
+0000088b  GPIOPinWrite                   
+00000879  ResetISR                       
+UNDEFED   SHT$$INIT_ARRAY$$Base          
+UNDEFED   SHT$$INIT_ARRAY$$Limit         
+000003a1  SysCtlClockSet                 
+00000891  SysCtlDelay                    
+000007b5  SysCtlPeripheralEnable         
+20000200  __STACK_END                    
+00000200  __STACK_SIZE                   
+20000200  __STACK_TOP                    
+000008bc  __TI_CINIT_Base                
+000008c4  __TI_CINIT_Limit               
+000008b4  __TI_Handler_Table_Base        
+000008bc  __TI_Handler_Table_Limit       
+000005e9  __TI_auto_init                 
+20000200  __TI_cleanup_ptr               
+00000659  __TI_decompress_lzss           
+0000086b  __TI_decompress_none           
+20000204  __TI_dtors_ptr                 
+20000208  __TI_enable_exit_profile_output
+ffffffff  __TI_pprof_out_hndl            
+ffffffff  __TI_prof_data_size            
+ffffffff  __TI_prof_data_start           
+00000000  __TI_static_base__             
+0000054d  __aeabi_memcpy                 
+0000054d  __aeabi_memcpy4                
+0000054d  __aeabi_memcpy8                
+ffffffff  __binit__                      
+ffffffff  __c_args__                     
+0000039f  __mpu_init                     
+20000000  __stack                        
+0000082d  _args_main                     
+000006c1  _c_int00                       
+2000020c  _lock                          
+00000853  _nop                           
+0000084b  _register_lock                 
+00000845  _register_unlock               
+0000082b  _system_post_cinit             
+00000897  _system_pre_init               
+20000210  _unlock                        
+00000719  abort                          
+ffffffff  binit                          
+00000769  copy_in                        
+00000721  exit                           
+00000000  g_pfnVectors                   
+000004c5  main                           
+20000214  main_func_sp                   
+0000054d  memcpy                         
+000004a5  pin_config                     
+00000495  setup                          
+
+
+GLOBAL SYMBOLS: SORTED BY Symbol Address 
+
+address   name                           
+-------   ----                           
+00000000  __TI_static_base__             
+00000000  g_pfnVectors                   
+00000200  __STACK_SIZE                   
+0000026d  GPIOPadConfigSet               
+0000039f  __mpu_init                     
+000003a1  SysCtlClockSet                 
+00000495  setup                          
+000004a5  pin_config                     
+000004c5  main                           
+0000054d  __aeabi_memcpy                 
+0000054d  __aeabi_memcpy4                
+0000054d  __aeabi_memcpy8                
+0000054d  memcpy                         
+000005e9  __TI_auto_init                 
+00000659  __TI_decompress_lzss           
+000006c1  _c_int00                       
+00000715  C$$EXIT                        
+00000719  abort                          
+00000721  exit                           
+00000769  copy_in                        
+000007b5  SysCtlPeripheralEnable         
+000007e9  GPIODirModeSet                 
+00000813  GPIOPinTypeGPIOOutput          
+0000082b  _system_post_cinit             
+0000082d  _args_main                     
+00000845  _register_unlock               
+0000084b  _register_lock                 
+00000853  _nop                           
+00000859  GPIOPinTypeGPIOInput           
+0000086b  __TI_decompress_none           
+00000879  ResetISR                       
+00000885  GPIOPinRead                    
+0000088b  GPIOPinWrite                   
+00000891  SysCtlDelay                    
+00000897  _system_pre_init               
+000008b4  __TI_Handler_Table_Base        
+000008bc  __TI_CINIT_Base                
+000008bc  __TI_Handler_Table_Limit       
+000008c4  __TI_CINIT_Limit               
+20000000  __stack                        
+20000200  __STACK_END                    
+20000200  __STACK_TOP                    
+20000200  __TI_cleanup_ptr               
+20000204  __TI_dtors_ptr                 
+20000208  __TI_enable_exit_profile_output
+2000020c  _lock                          
+20000210  _unlock                        
+20000214  main_func_sp                   
+ffffffff  __TI_pprof_out_hndl            
+ffffffff  __TI_prof_data_size            
+ffffffff  __TI_prof_data_start           
+ffffffff  __binit__                      
+ffffffff  __c_args__                     
+ffffffff  binit                          
+UNDEFED   SHT$$INIT_ARRAY$$Base          
+UNDEFED   SHT$$INIT_ARRAY$$Limit         
+
+[56 symbols]
